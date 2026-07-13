@@ -61,7 +61,7 @@ The lesson generalises: *model complexity should be earned, not assumed.* I keep
 
 ## Validation: why the split matters
 
-The models are validated with **`TimeSeriesSplit`, not random k-fold** — and this is not a stylistic choice.
+The models are validated with **`TimeSeriesSplit`, not random k-fold**, and this is not a stylistic choice.
 
 Air pollution is strongly autocorrelated. A random split would place tomorrow's reading in the training set and yesterday's in the test set, letting the model peek at the future to "predict" the past. The resulting scores would look excellent and mean nothing.
 
