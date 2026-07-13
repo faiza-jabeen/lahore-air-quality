@@ -1,6 +1,6 @@
 # Lahore Air Quality: What Actually Drives the Smog?
 
-An end-to-end analysis of two years of PM2.5 readings from five monitoring stations across Lahore — from messy raw sensor data through to validated predictive models.
+An end-to-end analysis of two years of PM2.5 readings from five monitoring stations across Lahore, from messy raw sensor data through to validated predictive models.
 
 **Implemented twice, in both Python and R**, to demonstrate equivalent workflows in each language.
 
@@ -21,9 +21,9 @@ Lahore's air is bad. But *how* bad, *when*, and *why* are questions worth answer
 
 Three things came out of the modelling that I did not expect going in:
 
-1. **Wind is the single most powerful weather lever.** Not temperature, not rainfall — wind speed. Each additional km/h of wind measurably clears the air.
-2. **Pollution is not shared equally.** The gap between the cleanest and dirtiest neighbourhood is large enough that residents are effectively breathing different air.
-3. **The simple model won.** Linear regression outperformed Random Forest (R² 0.724 vs 0.647). More on why below — this is the most interesting result in the project.
+1. **Wind is the single most powerful weather lever.** Not temperature, not rainfall. Wind speed. Each additional km/h of wind measurably clears the air.
+2. **Pollution is not shared equally.**  The gap between the cleanest and dirtiest neighbourhood is large enough that residents are effectively breathing different air.
+3. **The simple model won.** Linear regression outperformed Random Forest (R² 0.724 vs 0.647),and the reason is the most interesting thing in this project. I explain it below.
 
 ---
 
