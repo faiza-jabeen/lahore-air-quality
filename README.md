@@ -32,7 +32,7 @@ Three things came out of the modelling that I did not expect going in:
 ### The seasonal cycle
 ![Seasonal cycle](outputs/01_seasonal_cycle.png)
 
-Smog season is not a gradual worsening — it is a step change. The shaded band is ±1 SD, and even the *good* days in December are worse than the *bad* days in August.
+Smog season is not a gradual worsening; it is a step change. The shaded band is ±1 SD, and even the *good* days in December are worse than the *bad* days in August.
 
 ### Not everyone breathes the same air
 ![Station comparison](outputs/02_station_comparison.png)
@@ -53,7 +53,7 @@ Wind disperses; humidity traps. The relationship with wind is strong and close t
 
 This is the part I would want an interviewer to ask about.
 
-The instinct is to reach for the flexible model. But Random Forest lost, and it lost for a legible reason: **the underlying relationships here are close to linear.** Wind clears the air at a roughly constant rate. Yesterday's PM2.5 predicts today's in an almost straight line. When the true signal is linear, a tree ensemble spends its capacity approximating straight lines with staircases — adding variance without reducing bias.
+The instinct is to reach for the flexible model. But Random Forest lost, and it lost for a legible reason: **the underlying relationships here are close to linear.** Wind clears the air at a roughly constant rate. Yesterday's PM2.5 predicts today's in an almost straight line. When the true signal is linear, a tree ensemble spends its capacity approximating straight lines with staircases, adding variance without reducing bias.
 
 The lesson generalises: *model complexity should be earned, not assumed.* I keep both models in the pipeline precisely so the comparison is visible rather than hidden.
 
@@ -65,7 +65,7 @@ The models are validated with **`TimeSeriesSplit`, not random k-fold** — and t
 
 Air pollution is strongly autocorrelated. A random split would place tomorrow's reading in the training set and yesterday's in the test set, letting the model peek at the future to "predict" the past. The resulting scores would look excellent and mean nothing.
 
-Every fold here trains only on the past and tests only on the future — the same constraint the model would face in deployment.
+Every fold here trains only on the past and tests only on the future, the same constraint the model would face in deployment.
 
 ---
 
@@ -73,11 +73,11 @@ Every fold here trains only on the past and tests only on the future — the sam
 
 The raw file is deliberately realistic. Before any analysis was possible:
 
-- **`-999` sentinel values** — a failed sensor reading, not clean air. Left in place, these would have dragged every average downward.
-- **185 missing PM2.5 readings** — dropped, because the target variable cannot be imputed without inventing the answer.
-- **Missing weather values** — interpolated *within each station, over time*, since weather is autocorrelated day to day. Filling with a global mean would have erased exactly the local variation the analysis is about.
-- **59 duplicate rows** — logging artefacts.
-- **Inconsistent station labels** — `"GULBERG"`, `" Gulberg "`, and `"Gulberg"` are one place, and a naive `groupby` would have reported them as three.
+- **`-999` sentinel values** signal a failed sensor reading, not clean air. Left in place, these would have dragged every average downward.
+- **185 missing PM2.5 readings** were dropped, because the target variable cannot be imputed without inventing the answer.
+- **Missing weather values** were interpolated *within each station, over time*, since weather is autocorrelated day to day. Filling with a global mean would have erased exactly the local variation the analysis is about.
+- **59 duplicate rows** were logging artefacts.
+- **Inconsistent station labels** meant `"GULBERG"`, `" Gulberg "`, and `"Gulberg"` were one place that a naive `groupby` would have reported as three.
 
 Roughly two-thirds of the code in this repo is cleaning and validation. That ratio is not an accident; it is the job.
 
